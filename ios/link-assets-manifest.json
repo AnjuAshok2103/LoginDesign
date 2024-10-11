@@ -1,0 +1,25 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/images/bottom_vector.png",
+      "sha1": "7e129ec0e74fa70effaccdca81c2288cdc37334d"
+    },
+    {
+      "path": "src/assets/images/bottom_vector1.png",
+      "sha1": "742c7fe60aa1144d8a9a978c25b76c6bbd27e6bb"
+    },
+    {
+      "path": "src/assets/images/bottom_vector2.png",
+      "sha1": "0d5c412ad6aa4f056a6367a940b629563fc7a4c4"
+    },
+    {
+      "path": "src/assets/images/bottom_vector3.png",
+      "sha1": "99d65c675c19269aabf78e8dae14ecfc06146816"
+    },
+    {
+      "path": "src/assets/images/top_vector.png",
+      "sha1": "a1477b10575f780f6cf670983bf8f60a0d5268ad"
+    }
+  ]
+}
