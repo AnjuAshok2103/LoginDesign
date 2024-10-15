@@ -1,79 +1,129 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
-import {Dimensions, Image, Text, TextInput, View} from 'react-native';
-import topImage from '../assets/images/top_vector.png';
-const Login = () => {
+import {
+  Dimensions,
+  Image,
+  Platform,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {styles} from '../styles';
+import {UnAuthStackList} from '../types';
+type LoginScreenProps = NativeStackScreenProps<UnAuthStackList, 'Login'>;
+const Login = ({navigation, route}: LoginScreenProps) => {
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
-  const [email, onChangeText] = useState('');
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const boxShadow =
+    Platform.OS === 'ios'
+      ? {
+          shadowColor: 'gray',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.75,
+          shadowRadius: 5,
+        }
+      : {
+          elevation: 10,
+        };
+  const signIn = () => {};
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-        gap: 20,
-      }}>
+    <View style={styles.loginContainer}>
+      <View style={styles.topBlob}>
+        <Image
+          style={{width: screenWidth, ...styles.topImage}}
+          source={require('../assets/images/top.png')}
+        />
+      </View>
+      <View style={styles.contentLogin}>
+        <Text style={styles.helloText}>Hello</Text>
+        <Text style={styles.signInText}>Sign In to your account</Text>
+
+        <View style={styles.inputContainer}>
+          <View
+            style={{
+              ...styles.textinputParent,
+              ...boxShadow,
+            }}>
+            <Icon name="account" size={25} color="#9A9A9A" />
+            <TextInput
+              value={username}
+              onChangeText={text => {
+                setUsername(text);
+              }}
+              placeholder="Username"
+              placeholderTextColor={'#C8C8C8'}
+              style={styles.textInput}
+            />
+          </View>
+          <View
+            style={{
+              ...styles.textinputParent,
+              ...boxShadow,
+            }}>
+            <Icon name="lock" size={25} color="#9A9A9A" />
+            <TextInput
+              value={password}
+              onChangeText={text => {
+                setPassword(text);
+              }}
+              placeholder="Password"
+              placeholderTextColor={'#C8C8C8'}
+              style={styles.textInput}
+              secureTextEntry={true}
+            />
+          </View>
+        </View>
+        <View style={styles.forgotPasswordView}>
+          <Text style={styles.forgotPasswordText}>Forgot your Password?</Text>
+        </View>
+      </View>
+
       <View
         style={{
-          flex: 1,
-          position: 'absolute',
-          left: 0,
-          top: -40,
+          ...styles.signInBtnContainer,
+          bottom: (screenHeight * 2) / 5,
+        }}>
+        <Text style={styles.signIn}>Sign In</Text>
+        <TouchableOpacity onPress={signIn} style={styles.signInBtn}>
+          <View>
+            <Icon name="arrow-right-thin" size={25} color={'white'} />
+          </View>
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity
+        style={{
+          alignItems: 'center',
+          width: screenWidth,
+          height: screenWidth / 2,
+        }}
+        activeOpacity={0}
+        onPress={() => navigation.navigate('CreateAccount')}>
+        <Text style={styles.forgotPasswordText}>
+          Don't have an account? Create
+        </Text>
+      </TouchableOpacity>
+      <View
+        style={{
+          ...styles.bottomBlob,
+          width: screenWidth,
+          bottom: -0,
+          left: -screenWidth / 1.6,
         }}>
         <Image
           style={{
             width: screenWidth,
-            height: screenHeight * 0.2,
-            resizeMode: 'cover',
+            height: screenHeight / 5,
+            ...styles.imageResizeStretch,
           }}
-          source={topImage}
-        />
-      </View>
-      <View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 10,
-        }}>
-        <Text style={{fontWeight: '400', fontSize: 30}}>Hello</Text>
-        <Text style={{fontWeight: '200', fontSize: 16}}>
-          Sign In to your account
-        </Text>
-      </View>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: 'red',
-        }}>
-        <View style={{flex: 1}}>
-          <TextInput
-            style={{
-              width: '80%',
-              height: 40,
-              margin: 12,
-              borderWidth: 1,
-              borderRadius: 20,
-              padding: 10,
-            }}
-            onChangeText={onChangeText}
-            value={email}
-          />
-        </View>
-      </View>
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          position: 'absolute',
-          bottom: (screenHeight * 0.2) / 4,
-          left: -10,
-        }}>
-        <Image
-          style={{
-            width: screenWidth / 2,
-            height: screenHeight * 0.2, // Set a dynamic height relative to the screen size
-            resizeMode: 'contain',
-          }}
-          source={require('../assets/images/bottom_vector3.png')}
+          source={require('../assets/images/maskbottom.png')}
         />
       </View>
     </View>
